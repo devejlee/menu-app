@@ -8,7 +8,7 @@ import NotFound from './components/NotFound/NotFound'
 
 const App = () => {
   return (
-    <>
+    <div className='pt-[20vh] flex flex-col items-center min-h-screen'>
       <Navigation />
       <Routes>
         <Route path='/' element={<StepOne />} />
@@ -17,7 +17,7 @@ const App = () => {
         <Route path='/step-four' element={<StepFour />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
-    </>
+    </div>
   )
 }
 
