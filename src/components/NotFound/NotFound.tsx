@@ -1,8 +1,8 @@
 const NotFound = () => {
   return (
-    <div>
+    <main className='mt-4'>
       <h1>Page Not Found</h1>
-    </div>
+    </main>
   );
 }
 

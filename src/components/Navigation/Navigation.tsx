@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 const Navigation = () => {
   return (
     <nav>
-      <ul className="flex sm:justify-center space-x-4">
+      <ul className="flex flex-wrap space-x-2">
         {[
           ['Step 1', '/'],
           ['Step 2', '/step-two'],

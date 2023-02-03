@@ -1,8 +1,8 @@
 const StepFour = () => {
   return (
-    <div>
+    <main className='mt-4'>
       <h1>Review</h1>
-    </div>
+    </main>
   );
 }
 

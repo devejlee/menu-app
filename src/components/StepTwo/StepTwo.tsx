@@ -1,8 +1,8 @@
 const StepTwo = () => {
   return (
-    <div>
+    <main className='mt-4'>
       <h1>Step 2</h1>
-    </div>
+    </main>
   );
 }
 
