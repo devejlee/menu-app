@@ -1,33 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { Route, Routes } from 'react-router-dom'
+import StepOne from './components/StepOne/StepOne'
+import StepThree from './components/StepThree/StepThree'
+import StepTwo from './components/StepTwo/StepTwo'
+import StepFour from './components/StepFour/StepFour'
+import Navigation from './components/Navigation/Navigation'
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
+    <>
+      <Navigation />
+      <Routes>
+        <Route path='/' element={<StepOne />} />
+        <Route path='/step-two' element={<StepTwo />} />
+        <Route path='/step-three' element={<StepThree />} />
+        <Route path='/step-four' element={<StepFour />} />
+      </Routes>
+    </>
   )
 }
 
