@@ -13,5 +13,7 @@ export interface DishesState {
   dishes: Dish[];
   isLoading: boolean;
   error: string;
+  selectedMeal: Meal,
   fetchDishes: () => void
+  updateSelectedMeal: (meal: Meal) => void
 }

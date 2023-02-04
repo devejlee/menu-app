@@ -9,6 +9,7 @@ export const useDishesStore = create<DishesState>()(
         dishes: [],
         isLoading: false,
         error: '',
+        selectedMeal: 'breakfast',
         fetchDishes: async () => {
           try {
             set({ isLoading: true, error: '' });
@@ -25,7 +26,10 @@ export const useDishesStore = create<DishesState>()(
           } finally {
             set({ isLoading: false});
           }
-        }
+        },
+        updateSelectedMeal: (meal) => {
+          set({ selectedMeal: meal });
+        },
       }),
       {
         name: 'dishes-storage',
