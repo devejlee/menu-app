@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import useClickAway from '../hooks/useClickAway';
 import { useDishesStore } from '../../store/dishesStore';
 import { Dish, Meal, Restaurant } from '../../types';
 
@@ -13,6 +14,10 @@ const Dropdown = ({ options, optionType, error = false }: DropdownProps) => {
   const selectedRestaurant = useDishesStore(state => state.selectedRestaurant);
   const updateSelectedMeal = useDishesStore(state => state.updateSelectedMeal);
   const updateSelectedRestaurant = useDishesStore(state => state.updateSelectedRestaurant);
+
+  const ref = useClickAway(() => {
+    setIsOpen(false)
+  });
 
   const [selected, setSelected] = useState('');
   const [isOpen, setIsOpen] = useState(false);
@@ -43,7 +48,7 @@ const Dropdown = ({ options, optionType, error = false }: DropdownProps) => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative" ref={ref}>
       <button
         className={`relative w-full rounded-md border ${error ? 'border-red-500' : 'border-gray-400'} bg-white pl-3 pr-10 py-2 text-left focus:border-indigo-500 hover:border-gray-500`}
         aria-haspopup="listbox"
