@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
-import { DishesState, Dish } from '../types';
+import { DishesState } from '../types';
 
 export const useDishesStore = create<DishesState>()(
   devtools(

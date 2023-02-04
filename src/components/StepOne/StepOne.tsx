@@ -11,7 +11,7 @@ const StepOne = () => {
     if (fetchDishes) {
       setDishes(fetchDishes.data)
     }
-  }, [fetchDishes])
+  }, [fetchDishes, setDishes])
 
   return (
     <main className='mt-4'>
