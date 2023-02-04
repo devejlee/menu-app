@@ -12,6 +12,7 @@ export const useDishesStore = create<DishesState>()(
         showStepOneErrors: false,
         selectedMeal: null,
         selectedPeople: 1,
+        selectedRestaurant: null,
         fetchDishes: async () => {
           try {
             set({ isLoading: true, error: '' });
@@ -37,6 +38,9 @@ export const useDishesStore = create<DishesState>()(
         },
         updateSelectedPeople: (value) => {
           set({ selectedPeople: value });
+        },
+        updateSelectedRestaurant: (restaurant) => {
+          set({ selectedRestaurant: restaurant });
         },
       }),
       {

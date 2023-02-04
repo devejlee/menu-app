@@ -10,7 +10,9 @@ interface DropdownProps {
 
 const Dropdown = ({ options, optionType, error = false }: DropdownProps) => {
   const selectedMeal = useDishesStore(state => state.selectedMeal);
+  const selectedRestaurant = useDishesStore(state => state.selectedRestaurant);
   const updateSelectedMeal = useDishesStore(state => state.updateSelectedMeal);
+  const updateSelectedRestaurant = useDishesStore(state => state.updateSelectedRestaurant);
 
   const [selected, setSelected] = useState('');
   const [isOpen, setIsOpen] = useState(false);
@@ -24,8 +26,21 @@ const Dropdown = ({ options, optionType, error = false }: DropdownProps) => {
     setIsOpen(false);
     if (optionType === 'meal') {
       updateSelectedMeal(optionName as Meal)
+    } else if (optionType === 'restaurant') {
+      updateSelectedRestaurant(optionName as Restaurant)
     }
   }
+
+  const getSelected = () => {
+    switch (optionType) {
+      case 'meal':
+        return selectedMeal || selected || '---';
+      case 'restaurant':
+        return selectedRestaurant || selected || '---';
+      default:
+        return selected || '---';
+    }
+  };
 
   return (
     <div className="relative">
@@ -35,7 +50,7 @@ const Dropdown = ({ options, optionType, error = false }: DropdownProps) => {
         aria-expanded={isOpen}
         onClick={handleDropdown}
       >
-        <span>{selectedMeal || selected || '---'}</span>
+        <span>{getSelected()}</span>
         <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
           <svg className="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeWidth="2" d="M19 9l-7 7-7-7" />

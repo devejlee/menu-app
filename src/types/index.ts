@@ -16,8 +16,10 @@ export interface DishesState {
   showStepOneErrors: boolean;
   selectedMeal: Meal | null;
   selectedPeople: number;
+  selectedRestaurant: Restaurant | null;
   fetchDishes: () => void;
   updateShowStepOneErrors: (value: boolean) => void;
   updateSelectedMeal: (meal: Meal) => void;
   updateSelectedPeople: (value: number) => void;
+  updateSelectedRestaurant: (restaurant: Restaurant) => void;
 }
