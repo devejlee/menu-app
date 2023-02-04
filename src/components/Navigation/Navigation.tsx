@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useDishesStore } from '../../store/dishesStore';
+import { useEffect } from 'react';
 
 const Navigation = () => {
   const selectedMeal = useDishesStore(state => state.selectedMeal);
@@ -17,6 +18,12 @@ const Navigation = () => {
     }
     navigate(url)
   }
+
+  useEffect(() => {
+    if (!selectedMeal) {
+      navigate('/')
+    }
+  }, [selectedMeal, navigate])
 
   return (
     <nav>
