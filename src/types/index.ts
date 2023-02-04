@@ -14,11 +14,13 @@ export interface DishesState {
   isLoading: boolean;
   error: string | null;
   showStepOneErrors: boolean;
+  showStepTwoErrors: boolean;
   selectedMeal: Meal | null;
   selectedPeople: number;
   selectedRestaurant: Restaurant | null;
   fetchDishes: () => void;
   updateShowStepOneErrors: (value: boolean) => void;
+  updateShowStepTwoErrors: (value: boolean) => void;
   updateSelectedMeal: (meal: Meal) => void;
   updateSelectedPeople: (value: number) => void;
   updateSelectedRestaurant: (restaurant: Restaurant) => void;

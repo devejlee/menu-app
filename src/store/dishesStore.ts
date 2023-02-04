@@ -10,6 +10,7 @@ export const useDishesStore = create<DishesState>()(
         isLoading: false,
         error: null,
         showStepOneErrors: false,
+        showStepTwoErrors: false,
         selectedMeal: null,
         selectedPeople: 1,
         selectedRestaurant: null,
@@ -32,6 +33,9 @@ export const useDishesStore = create<DishesState>()(
         },
         updateShowStepOneErrors: (value) => {
           set({ showStepOneErrors: value});
+        },
+        updateShowStepTwoErrors: (value) => {
+          set({ showStepTwoErrors: value});
         },
         updateSelectedMeal: (meal) => {
           set({ selectedMeal: meal });
