@@ -1,5 +1,6 @@
 import { useDishesStore } from '../../store/dishesStore';
 import { useEffect } from 'react';
+import Dropdown from '../Dropdown/Dropdown';
 
 const StepOne = () => {
   const dishes = useDishesStore(state => state.dishes)
@@ -13,14 +14,10 @@ const StepOne = () => {
 
   return (
     <main className='mt-4'>
-      <h1>Step 1</h1>
       {isLoading && <p>Loading...</p>}
       {error && <p>{error}</p>}
-      {(!isLoading && !error) && dishes?.map((dish: any) => {
-        return (
-          <p key={dish.id}>{dish.name}</p>
-        )
-      })}
+      <p>Please select a meal</p>
+      {(!isLoading && !error) && <Dropdown dishes={dishes} />}
     </main>
   );
 }
