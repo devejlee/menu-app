@@ -11,5 +11,7 @@ export interface Dish {
 
 export interface DishesState {
   dishes: Dish[];
-  setDishes: (data: Dish[]) => void
+  isLoading: boolean;
+  error: string;
+  fetchDishes: () => void
 }
