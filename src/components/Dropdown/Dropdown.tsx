@@ -5,9 +5,10 @@ import { Dish, Meal, Restaurant } from '../../types';
 interface DropdownProps {
   options: Dish[] | Meal[] | Restaurant[];
   optionType: 'dish' | 'meal' | 'restaurant';
+  error?: boolean;
 }
 
-const Dropdown = ({ options, optionType }: DropdownProps) => {
+const Dropdown = ({ options, optionType, error = false }: DropdownProps) => {
   const selectedMeal = useDishesStore(state => state.selectedMeal);
   const updateSelectedMeal = useDishesStore(state => state.updateSelectedMeal);
 
@@ -29,7 +30,7 @@ const Dropdown = ({ options, optionType }: DropdownProps) => {
   return (
     <div className="relative">
       <button
-        className="relative w-full rounded-md border border-gray-400 bg-white pl-3 pr-10 py-2 text-left focus:border-indigo-500 hover:border-gray-500"
+        className={`relative w-full rounded-md border ${error ? 'border-red-500' : 'border-gray-400'} bg-white pl-3 pr-10 py-2 text-left focus:border-indigo-500 hover:border-gray-500`}
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         onClick={handleDropdown}

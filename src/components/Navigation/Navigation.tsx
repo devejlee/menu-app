@@ -1,9 +1,20 @@
 import { useNavigate } from 'react-router-dom';
+import { useDishesStore } from '../../store/dishesStore';
 
 const Navigation = () => {
+  const selectedMeal = useDishesStore(state => state.selectedMeal);
+  const updateShowStepOneErrors = useDishesStore(state => state.updateShowStepOneErrors);
+
   const navigate = useNavigate();
 
   const handleNavigate = (url: string) => {
+    if (url !== '/') {
+      if (!selectedMeal) {
+        updateShowStepOneErrors(true)
+        return
+      }
+      updateShowStepOneErrors(false)
+    }
     navigate(url)
   }
 

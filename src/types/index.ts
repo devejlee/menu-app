@@ -12,10 +12,12 @@ export interface Dish {
 export interface DishesState {
   dishes: Dish[];
   isLoading: boolean;
-  error: string;
-  selectedMeal: Meal,
-  selectedPeople: number,
-  fetchDishes: () => void
-  updateSelectedMeal: (meal: Meal) => void
-  updateSelectedPeople: (value: number) => void
+  error: string | null;
+  showStepOneErrors: boolean;
+  selectedMeal: Meal | null;
+  selectedPeople: number;
+  fetchDishes: () => void;
+  updateShowStepOneErrors: (value: boolean) => void;
+  updateSelectedMeal: (meal: Meal) => void;
+  updateSelectedPeople: (value: number) => void;
 }
