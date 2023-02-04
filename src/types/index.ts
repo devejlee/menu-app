@@ -14,6 +14,8 @@ export interface DishesState {
   isLoading: boolean;
   error: string;
   selectedMeal: Meal,
+  selectedPeople: number,
   fetchDishes: () => void
   updateSelectedMeal: (meal: Meal) => void
+  updateSelectedPeople: (value: number) => void
 }

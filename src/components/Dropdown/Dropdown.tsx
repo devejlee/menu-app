@@ -29,12 +29,12 @@ const Dropdown = ({ options, optionType }: DropdownProps) => {
   return (
     <div className="relative">
       <button
-        className="relative w-full rounded-md border border-gray-300 bg-white pl-3 pr-10 py-2 text-left"
+        className="relative w-full rounded-md border border-gray-400 bg-white pl-3 pr-10 py-2 text-left focus:border-indigo-500 hover:border-gray-500"
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         onClick={handleDropdown}
       >
-        <span>{selectedMeal ? selectedMeal : selected || '---'}</span>
+        <span>{selectedMeal || selected || '---'}</span>
         <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
           <svg className="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeWidth="2" d="M19 9l-7 7-7-7" />
@@ -42,7 +42,7 @@ const Dropdown = ({ options, optionType }: DropdownProps) => {
         </span>
       </button>
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-56 rounded-md shadow-lg">
+        <div className="absolute z-10 right-0 mt-2 w-56 rounded-md shadow-lg">
           <div className="rounded-md bg-white shadow-xs overflow-auto max-h-[200px]">
             <ul
               className="divide-y divide-gray-200"
