@@ -20,6 +20,10 @@ const PeopleInput = () => {
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Backspace') {
       updateSelectedPeople(1)
+    } else if (event.key === 'ArrowUp') {
+      handleIncrement()
+    } else if (event.key === 'ArrowDown') {
+      handleDecrement()
     }
   };
 
