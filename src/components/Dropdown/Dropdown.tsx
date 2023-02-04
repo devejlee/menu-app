@@ -1,12 +1,13 @@
 import { useState } from 'react';
-import { Dish } from '../../types';
+import { Dish, Meal, Restaurant } from '../../types';
 
 interface DropdownProps {
-  dishes: Dish[];
+  options: Dish[] | Meal[] | Restaurant[];
+  optionType: 'dish' | 'meal' | 'restaurant';
 }
 
-const Dropdown = ({ dishes }: DropdownProps) => {
-  const [selectedDish, setSelectedDish] = useState('');
+const Dropdown = ({ options, optionType }: DropdownProps) => {
+  const [selected, setSelected] = useState('');
   const [isOpen, setIsOpen] = useState(false);
 
   const handleDropdown = () => {
@@ -21,10 +22,10 @@ const Dropdown = ({ dishes }: DropdownProps) => {
         aria-expanded={isOpen}
         onClick={handleDropdown}
       >
-        <span>{selectedDish || 'Select a dish'}</span>
+        <span>{selected || '---'}</span>
         <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
           <svg className="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            <path strokeWidth="2" d="M19 9l-7 7-7-7" />
           </svg>
         </span>
       </button>
@@ -36,20 +37,44 @@ const Dropdown = ({ dishes }: DropdownProps) => {
               role="listbox"
               aria-labelledby="options"
             >
-              {dishes.map((dish) => (
-                <li
-                  key={dish.id}
-                  className="py-2 pl-3 pr-9 cursor-pointer hover:bg-gray-50"
-                  role="option"
-                  aria-selected={dish.name === selectedDish}
-                  onClick={() => {
-                    setSelectedDish(dish.name);
-                    setIsOpen(false);
-                  }}
-                >
-                  {dish.name}
-                </li>
-              ))}
+              {options?.map((option, key) => {
+                let optionName = '';
+                let optionId = null
+
+                switch (optionType) {
+                  case 'dish':
+                    optionName = (option as Dish).name;
+                    optionId = (option as Dish).id;
+                    break;
+                  case 'meal':
+                    optionName = option as Meal;
+                    optionId = option as Meal
+                    break;
+                  case 'restaurant':
+                    optionName = option as Restaurant;
+                    optionId = option as Restaurant;
+                    break;
+                  default:
+                    optionName = '';
+                    optionId = key;
+                }
+
+                return (
+                  <li
+                    key={optionId}
+                    className="py-2 pl-3 pr-9 cursor-pointer hover:bg-gray-50"
+                    role="option"
+                    aria-selected={optionName === selected}
+                    onClick={() => {
+                      setSelected(optionName);
+                      setIsOpen(false);
+                    }}
+                  >
+                    {optionName}
+                  </li>
+                );
+              })}
+
             </ul>
           </div>
         </div>

@@ -1,6 +1,6 @@
-type Restaurant = 'Mc Donalds' | 'Taco Bell' | 'BBQ Hut' | 'Vege Deli' | 'Pizzeria' | 'Panda Express' | 'Olive Garden';
+export type Restaurant = 'Mc Donalds' | 'Taco Bell' | 'BBQ Hut' | 'Vege Deli' | 'Pizzeria' | 'Panda Express' | 'Olive Garden';
 
-type Meal = 'breakfast' | 'lunch' | 'dinner';
+export type Meal = 'breakfast' | 'lunch' | 'dinner';
 
 export interface Dish {
   id: number;
