@@ -13,6 +13,12 @@ const DishWithServing = ({ id, name, servings }: DishWithServingProps) => {
   const selectedDishes = useDishesStore(state => state.selectedDishes);
   const dishesFilteredBySelectedDishes = dishesFilteredByRestaurants.filter(dish => !selectedDishes.some(selectedDish => dish.id === selectedDish.id));
 
+  if (dishesFilteredBySelectedDishes.length === 0 && id === null) {
+    return (
+      <p className='flex justify-center'>No more options</p>
+    );
+  }
+
   return (
     <div className='flex flex-col mt-10 md:flex-row md:items-center'>
       <div className='md:mr-4'>
