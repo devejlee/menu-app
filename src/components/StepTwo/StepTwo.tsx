@@ -9,10 +9,9 @@ const StepTwo = () => {
   const showStepTwoErrors = useDishesStore(state => state.showStepTwoErrors);
   const selectedRestaurant = useDishesStore(state => state.selectedRestaurant);
 
-  const restaurants: Restaurant[] = ['Mc Donalds', 'Taco Bell', 'BBQ Hut', 'Vege Deli', 'Pizzeria', 'Panda Express', 'Olive Garden'];
   const error = !selectedRestaurant && showStepTwoErrors;
 
-  const newRestaurantArray = getRestaurantArray(dishesFilteredByMeals, restaurants);
+  const newRestaurantArray = getRestaurantArray(dishesFilteredByMeals);
 
   return (
     <main className='mt-4'>
