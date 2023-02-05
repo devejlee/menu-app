@@ -16,6 +16,7 @@ export const useDishesStore = create<DishesState>()(
         selectedMeal: null,
         selectedPeople: 1,
         selectedRestaurant: null,
+        selectedDishes: [],
         fetchDishes: async () => {
           try {
             set({ isLoading: true, error: '' });
@@ -57,6 +58,16 @@ export const useDishesStore = create<DishesState>()(
         updateSelectedRestaurant: (restaurant) => {
           set({ selectedRestaurant: restaurant });
         },
+        updateSelectedDishes: (name, servings) => {
+          set(state => {
+            return {
+              selectedDishes: [...state.selectedDishes, {
+                name: name,
+                servings: servings
+              }]
+            };
+          });
+        },        
       }),
       {
         name: 'dishes-storage',

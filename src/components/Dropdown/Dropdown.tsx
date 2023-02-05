@@ -26,9 +26,6 @@ const Dropdown = ({ options, optionType, error = false }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleDropdown = async () => {
-    if (optionType === 'dish' && !isOpen) {
-      await fetchDishes();
-    }
     setIsOpen((open) => !open);
   };
 
@@ -40,6 +37,7 @@ const Dropdown = ({ options, optionType, error = false }: DropdownProps) => {
       await fetchDishes();
     } else if (optionType === 'restaurant') {
       updateSelectedRestaurant(optionName as Restaurant);
+      await fetchDishes();
     }
   };
 

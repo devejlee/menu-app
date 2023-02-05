@@ -11,6 +11,11 @@ export interface Dish {
   availableMeals: Meal[];
 }
 
+export interface SelectedDish {
+  name: string;
+  servings: number
+}
+
 export interface DishesState {
   dishes: Dish[];
   dishesFilteredByMeals: Dish[];
@@ -22,10 +27,12 @@ export interface DishesState {
   selectedMeal: Meal | null;
   selectedPeople: number;
   selectedRestaurant: Restaurant | null;
+  selectedDishes: SelectedDish[];
   fetchDishes: () => void;
   updateShowStepOneErrors: (value: boolean) => void;
   updateShowStepTwoErrors: (value: boolean) => void;
   updateSelectedMeal: (meal: Meal) => void;
   updateSelectedPeople: (value: number) => void;
   updateSelectedRestaurant: (restaurant: Restaurant) => void;
+  updateSelectedDishes: (name: string, servings: number) => void;
 }
