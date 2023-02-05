@@ -102,14 +102,7 @@ export const useDishesStore = create<DishesState>()(
             name: null,
             servings: 1,
           }] });
-        },      
-        removeSelectedDishes: (id) => {
-          set(state => {
-            return {
-              selectedDishes: state.selectedDishes.filter(dish => dish.id !== id)
-            };
-          });
-        }   
+        },        
       }),
       {
         name: 'dishes-storage',

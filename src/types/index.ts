@@ -35,7 +35,6 @@ export interface DishesState {
   updateSelectedRestaurant: (restaurant: Restaurant) => void;
   addSelectedDishes: () => void;
   resetSelectedDishes: () => void;
-  removeSelectedDishes: (id: number) => void;
   updateSelectedDish: (id: number | null, name: string, servings: number) => void;
   resetSelectedDish: () => void;
   updateSelectedServings: (value: number) => void;

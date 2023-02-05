@@ -30,6 +30,7 @@ const StepThree = () => {
     }
     if (totalServings > 10) {
       setTotalServingsOverMaxError(true);
+      setTotalServingsUnderMinError(false);
       return;
     }
     if (selectedDishesServings < selectedPeople) {
@@ -42,6 +43,7 @@ const StepThree = () => {
 
   const handleReset = () => {
     resetSelectedDishes();
+    setTotalServingsUnderMinError(false);
   };
 
   useEffect(() => {
