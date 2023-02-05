@@ -4,6 +4,7 @@ import PreviousButton from '../PreviousButton/PreviousButton';
 import { useState, useEffect } from 'react';
 
 const StepThree = () => {
+  const selectedPeople = useDishesStore(state => state.selectedPeople);
   const selectedDishes = useDishesStore(state => state.selectedDishes);
   const selectedDish = useDishesStore(state => state.selectedDish);
   const dishesFilteredByRestaurants = useDishesStore(state => state.dishesFilteredByRestaurants);
@@ -20,6 +21,7 @@ const StepThree = () => {
 
   const [dishNotSelectedError, setDishNotSelectedError] = useState(false);
   const [totalServingsOverMaxError, setTotalServingsOverMaxError] = useState(false);
+  const [totalServingsUnderMinError, setTotalServingsUnderMinError] = useState(false);
 
   const handleClick = () => {
     if (selectedDish.id === null) {
@@ -29,6 +31,9 @@ const StepThree = () => {
     if (totalServings > 10) {
       setTotalServingsOverMaxError(true);
       return;
+    }
+    if (selectedDishesServings < selectedPeople) {
+      setTotalServingsUnderMinError(true);
     }
     addSelectedDishes();
     resetSelectedDish();
@@ -56,6 +61,12 @@ const StepThree = () => {
     resetSelectedServings();
   }, [resetSelectedDish, resetSelectedServings]);
 
+  useEffect(() => {
+    if (selectedDishesServings >= selectedPeople) {
+      setTotalServingsUnderMinError(false);
+    }
+  }, [selectedDishesServings, selectedPeople]);
+
   return (
     <main>
       {selectedDishes.map(({ id, name, servings }) => (
@@ -71,6 +82,9 @@ const StepThree = () => {
       )}
       {totalServingsOverMaxError && (
         <p className='mt-4 text-red-500'>Total servings over maximum (10)</p>
+      )}
+      {totalServingsUnderMinError && (
+        <p className='mt-4 text-red-500'>Total servings ({selectedDishesServings}) under minimum ({selectedPeople})</p>
       )}
     </main>
   );
