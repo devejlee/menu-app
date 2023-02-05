@@ -12,9 +12,10 @@ const StepThree = () => {
   const resetSelectedDish = useDishesStore(state => state.resetSelectedDish);
   const resetSelectedServings = useDishesStore(state => state.resetSelectedServings);
 
-  const totalServings = selectedDish.servings + selectedDishes.reduce((total, dish) => {
+  const selectedDishesServings = selectedDishes.reduce((total, dish) => {
     return dish.id !== null ? total + dish.servings : total;
   }, 0);
+  const totalServings = selectedDish.servings + selectedDishesServings;
 
   const [dishNotSelectedError, setDishNotSelectedError] = useState(false);
   const [totalServingsOverMaxError, setTotalServingsOverMaxError] = useState(false);

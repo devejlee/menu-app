@@ -5,11 +5,17 @@ import { useEffect } from 'react';
 const Navigation = () => {
   const selectedMeal = useDishesStore(state => state.selectedMeal);
   const selectedRestaurant = useDishesStore(state => state.selectedRestaurant);
+  const selectedPeople = useDishesStore(state => state.selectedPeople);
+  const selectedDishes = useDishesStore(state => state.selectedDishes);
   const updateShowStepOneErrors = useDishesStore(state => state.updateShowStepOneErrors);
   const updateShowStepTwoErrors = useDishesStore(state => state.updateShowStepTwoErrors);
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  const selectedDishesServings = selectedDishes.reduce((total, dish) => {
+    return dish.id !== null ? total + dish.servings : total;
+  }, 0);
 
   const checkSelectedMeal = () => {
     if (!selectedMeal) {
@@ -71,7 +77,7 @@ const Navigation = () => {
     {
       title: 'Step 4',
       url: '/step-four',
-      disabled: false
+      disabled: selectedPeople > selectedDishesServings
     },
   ];
 
