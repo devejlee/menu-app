@@ -72,12 +72,12 @@ const Navigation = () => {
     {
       title: 'Step 3',
       url: '/step-three',
-      disabled: !selectedMeal
+      disabled: !selectedMeal || !selectedRestaurant
     },
     {
       title: 'Step 4',
       url: '/step-four',
-      disabled: !selectedMeal || selectedPeople > selectedDishesServings
+      disabled: !selectedMeal || !selectedRestaurant || selectedPeople > selectedDishesServings
     },
   ];
 
