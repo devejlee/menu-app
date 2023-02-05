@@ -67,17 +67,17 @@ const Navigation = () => {
     {
       title: 'Step 2',
       url: '/step-two',
-      disabled: false
+      disabled: !selectedMeal
     },
     {
       title: 'Step 3',
       url: '/step-three',
-      disabled: false
+      disabled: !selectedMeal
     },
     {
       title: 'Step 4',
       url: '/step-four',
-      disabled: selectedPeople > selectedDishesServings
+      disabled: !selectedMeal || selectedPeople > selectedDishesServings
     },
   ];
 
