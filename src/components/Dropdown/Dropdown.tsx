@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useClickAway from '../hooks/useClickAway';
 import { useDishesStore } from '../../store/dishesStore';
 import { Dish, Meal, Restaurant, OptionType } from '../../types';
@@ -11,12 +11,13 @@ interface DropdownProps {
   name?: string | null;
 }
 
-const Dropdown = ({ options, optionType, error = false }: DropdownProps) => {
+const Dropdown = ({ options, optionType, name, error = false }: DropdownProps) => {
   const isLoading = useDishesStore(state => state.isLoading);
   const isError = useDishesStore(state => state.error);
   const selectedMeal = useDishesStore(state => state.selectedMeal);
   const selectedRestaurant = useDishesStore(state => state.selectedRestaurant);
   const selectedServings = useDishesStore(state => state.selectedServings);
+  const selectedDishes = useDishesStore(state => state.selectedDishes);
   const updateSelectedMeal = useDishesStore(state => state.updateSelectedMeal);
   const updateSelectedRestaurant = useDishesStore(state => state.updateSelectedRestaurant);
   const updateSelectedDish = useDishesStore(state => state.updateSelectedDish);
@@ -54,11 +55,16 @@ const Dropdown = ({ options, optionType, error = false }: DropdownProps) => {
       case 'restaurant':
         return selectedRestaurant || selected || '---';
       case 'dish':
-        return isError ? 'error fetching dishes' : isLoading ? 'loading...' : selected || '---';
+        return isError ? 'error fetching dishes' : isLoading ? 'loading...' : name || selected || '---';
       default:
         return selected || '---';
     }
   };
+
+  useEffect(() => {
+    console.log('selectedDishes', selectedDishes);
+    setSelected('');
+  }, [selectedDishes]);
 
   return (
     <div className="relative" ref={ref}>

@@ -1,15 +1,18 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent, useEffect } from 'react';
 import { useDishesStore } from '../../store/dishesStore';
 
 interface CustomInputProps {
   optionType: 'people' | 'servings'
+  servings?: number
+  id?: number | null
 }
 
-const CustomInput = ({ optionType }: CustomInputProps) => {
+const CustomInput = ({ optionType, servings, id }: CustomInputProps) => {
   const [count, setCount] = useState(1);
 
   const selectedPeople = useDishesStore(state => state.selectedPeople);
   const selectedServings = useDishesStore(state => state.selectedServings);
+  const selectedDishes = useDishesStore(state => state.selectedDishes);
   const updateSelectedPeople = useDishesStore(state => state.updateSelectedPeople);
   const updateSelectedServings = useDishesStore(state => state.updateSelectedServings);
 
@@ -69,15 +72,18 @@ const CustomInput = ({ optionType }: CustomInputProps) => {
   };
 
   const getCount = () => {
-    switch (optionType) {
-      case 'people':
-        return selectedPeople || count;
-      case 'servings':
-        return count;
-      default:
-        return count;
+    if (optionType === 'people') {
+      return selectedPeople || count;
     }
+    else if (optionType === 'servings' && id !== null) {
+      return servings;
+    }
+    return count;
   };
+
+  useEffect(() => {
+    setCount(1);
+  }, [selectedDishes]);
 
   return (
     <div className="relative">
