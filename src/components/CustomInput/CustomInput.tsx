@@ -1,7 +1,13 @@
-import React, { ChangeEvent } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import { useDishesStore } from '../../store/dishesStore';
 
-const PeopleInput = () => {
+interface CustomInputProps {
+  optionType: 'people' | 'servings'
+}
+
+const CustomInput = ({ optionType }: CustomInputProps) => {
+  const [count, setCount] = useState(1);
+
   const selectedPeople = useDishesStore(state => state.selectedPeople);
   const updateSelectedPeople = useDishesStore(state => state.updateSelectedPeople);
 
@@ -11,15 +17,24 @@ const PeopleInput = () => {
     const lastCharacterAsNumber = Number(lastCharacter);
     if (value === '10') {
       const numberValue = Number(value);
-      updateSelectedPeople(numberValue);
+      setCount(numberValue);
+      if (optionType === 'people') {
+        updateSelectedPeople(numberValue);
+      }
     } else if (lastCharacterAsNumber >= 1 && lastCharacterAsNumber <= 9 && value !== '10') {
-      updateSelectedPeople(lastCharacterAsNumber);
+      if (optionType === 'people') {
+        setCount(lastCharacterAsNumber);
+        updateSelectedPeople(lastCharacterAsNumber);
+      }
     }
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Backspace') {
-      updateSelectedPeople(1);
+      setCount(1);
+      if (optionType === 'people') {
+        updateSelectedPeople(1);
+      }
     } else if (event.key === 'ArrowUp') {
       handleIncrement();
     } else if (event.key === 'ArrowDown') {
@@ -28,18 +43,24 @@ const PeopleInput = () => {
   };
 
   const handleIncrement = () => {
-    updateSelectedPeople(selectedPeople < 10 ? selectedPeople + 1 : selectedPeople);
+    setCount(count < 10 ? count + 1 : count);
+    if (optionType === 'people') {
+      updateSelectedPeople(selectedPeople < 10 ? selectedPeople + 1 : selectedPeople);
+    }
   };
 
   const handleDecrement = () => {
-    updateSelectedPeople(selectedPeople > 1 ? selectedPeople - 1 : selectedPeople);
+    setCount(count > 1 ? count - 1 : count);
+    if (optionType === 'people') {
+      updateSelectedPeople(selectedPeople > 1 ? selectedPeople - 1 : selectedPeople);
+    }
   };
 
   return (
     <div className="relative">
       <input
         type="string"
-        value={selectedPeople}
+        value={optionType === 'people' ? selectedPeople : count}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         className="border w-full border-gray-400 rounded py-2 px-4 leading-tight focus:outline-none focus:border-indigo-500 hover:border-gray-500"
@@ -61,4 +82,4 @@ const PeopleInput = () => {
   );
 };
 
-export default PeopleInput;
+export default CustomInput;

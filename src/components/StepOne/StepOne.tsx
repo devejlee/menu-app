@@ -1,5 +1,5 @@
 import Dropdown from '../Dropdown/Dropdown';
-import PeopleInput from '../PeopleInput/PeopleInput';
+import CustomInput from '../CustomInput/CustomInput';
 import { Meal } from '../../types';
 import { useDishesStore } from '../../store/dishesStore';
 
@@ -16,7 +16,7 @@ const StepOne = () => {
       <Dropdown options={meals} optionType='meal' error={error} />
       {error && <p className='text-red-500'>Select a meal!</p>}
       <p className='mt-4'>Please enter the number of people</p>
-      <PeopleInput />
+      <CustomInput optionType='people' />
     </main>
   );
 };
