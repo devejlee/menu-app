@@ -12,11 +12,20 @@ const StepThree = () => {
   const resetSelectedDish = useDishesStore(state => state.resetSelectedDish);
   const resetSelectedServings = useDishesStore(state => state.resetSelectedServings);
 
-  const [error, setError] = useState(false);
+  const totalServings = selectedDish.servings + selectedDishes.reduce((total, dish) => {
+    return dish.id !== null ? total + dish.servings : total;
+  }, 0);
+
+  const [dishNotSelectedError, setDishNotSelectedError] = useState(false);
+  const [totalServingsOverMaxError, setTotalServingsOverMaxError] = useState(false);
 
   const handleClick = () => {
     if (selectedDish.id === null) {
-      setError(true);
+      setDishNotSelectedError(true);
+      return;
+    }
+    if (totalServings > 10) {
+      setTotalServingsOverMaxError(true);
       return;
     }
     addSelectedDishes();
@@ -26,9 +35,20 @@ const StepThree = () => {
 
   useEffect(() => {
     if (selectedDish.id !== null) {
-      setError(false);
+      setDishNotSelectedError(false);
     }
   }, [selectedDish.id]);
+
+  useEffect(() => {
+    if (totalServings <= 10) {
+      setTotalServingsOverMaxError(false);
+    }
+  }, [totalServings]);
+
+  useEffect(() => {
+    resetSelectedDish();
+    resetSelectedServings();
+  }, [resetSelectedDish, resetSelectedServings]);
 
   return (
     <main className='mt-4'>
@@ -39,8 +59,11 @@ const StepThree = () => {
       {dishesFilteredBySelectedDishes.length > 0 && (
         <button className='mt-2 ml-4 rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900' onClick={handleClick}>Add Dish</button>
       )}
-      {error && (
+      {dishNotSelectedError && (
         <p className='mt-4 text-red-500'>Dish not selected</p>
+      )}
+      {totalServingsOverMaxError && (
+        <p className='mt-4 text-red-500'>Total servings over maximum (10)</p>
       )}
     </main>
   );
