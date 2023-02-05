@@ -9,9 +9,10 @@ interface DropdownProps {
   error?: boolean;
   id?: number | null;
   name?: string | null;
+  disabled?: boolean;
 }
 
-const Dropdown = ({ options, optionType, name, error = false }: DropdownProps) => {
+const Dropdown = ({ options, optionType, name, error = false, disabled = false }: DropdownProps) => {
   const isLoading = useDishesStore(state => state.isLoading);
   const isError = useDishesStore(state => state.error);
   const selectedMeal = useDishesStore(state => state.selectedMeal);
@@ -34,6 +35,9 @@ const Dropdown = ({ options, optionType, name, error = false }: DropdownProps) =
   const [isOpen, setIsOpen] = useState(false);
 
   const handleDropdown = async () => {
+    if (disabled) {
+      return;
+    }
     setIsOpen((open) => !open);
   };
 
@@ -77,7 +81,7 @@ const Dropdown = ({ options, optionType, name, error = false }: DropdownProps) =
   return (
     <div className="relative" ref={ref}>
       <button
-        className={`relative w-full rounded-md border ${error ? 'border-red-500' : 'border-gray-400'} bg-white pl-3 pr-10 py-2 text-left focus:border-indigo-500 hover:border-gray-500`}
+        className={`relative w-full rounded-md border ${error ? 'border-red-500' : 'border-gray-400'} bg-white pl-3 pr-10 py-2 text-left focus:border-indigo-500 hover:border-gray-500 ${disabled ? 'cursor-not-allowed' : ''}`}
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         onClick={handleDropdown}

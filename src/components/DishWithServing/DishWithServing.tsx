@@ -13,6 +13,8 @@ const DishWithServing = ({ id, name, servings }: DishWithServingProps) => {
   const selectedDishes = useDishesStore(state => state.selectedDishes);
   const dishesFilteredBySelectedDishes = dishesFilteredByRestaurants.filter(dish => !selectedDishes.some(selectedDish => dish.id === selectedDish.id));
 
+  const disabled = id !== null;
+
   if (dishesFilteredBySelectedDishes.length === 0 && id === null) {
     return (
       <p className='flex justify-center'>No more options</p>
@@ -21,13 +23,13 @@ const DishWithServing = ({ id, name, servings }: DishWithServingProps) => {
 
   return (
     <div className='flex flex-col mt-10 md:flex-row md:items-center'>
-      <div className='md:mr-4'>
-        <p>Please select a dish</p>
-        <Dropdown options={dishesFilteredBySelectedDishes} optionType='dish' id={id} name={name} />
+      <div className='flex-grow md:mr-4'>
+        {!disabled && <p>Please select a dish</p>}
+        <Dropdown options={dishesFilteredBySelectedDishes} optionType='dish' id={id} name={name} disabled={disabled} />
       </div>
       <div>
-        <p>Please enter no. of servings</p>
-        <CustomInput optionType='servings' id={id} servings={servings} />
+        {!disabled && <p>Please enter no. of servings</p>}
+        <CustomInput optionType='servings' id={id} servings={servings} disabled={disabled} />
       </div>
     </div>
   );
