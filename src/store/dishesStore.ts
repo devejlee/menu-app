@@ -84,15 +84,13 @@ export const useDishesStore = create<DishesState>()(
         },
         updateSelectedServings: (value) => {
           set(state => {
-            console.log('value', value);
-            const test = {
+            const newSelectedDish = {
               ...state.selectedDish,
               servings: value,
             };
-            console.log('test', test);
             return {
               selectedServings: value,
-              selectedDish: test
+              selectedDish: newSelectedDish
             };
           });
         },        

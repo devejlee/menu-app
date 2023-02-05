@@ -18,7 +18,7 @@ const StepThree = () => {
       {selectedDishes.map(({ id, name, servings }) => (
         <DishWithServing id={id} name={name} servings={servings} key={id} />
       ))}
-      <button className='btn btn-primary mt-2' onClick={handleClick}>Add Dish</button>
+      <button className='mt-2 rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900' onClick={handleClick}>Add Dish</button>
     </main>
   );
 };

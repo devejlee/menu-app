@@ -71,7 +71,6 @@ const Dropdown = ({ options, optionType, name, error = false }: DropdownProps) =
   };
 
   useEffect(() => {
-    console.log('selectedDishes', selectedDishes);
     setSelected('');
   }, [selectedDishes]);
 
