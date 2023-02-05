@@ -56,7 +56,10 @@ const Navigation = () => {
     if (!selectedRestaurant && location.pathname !== '/' && location.pathname !== '/step-two') {
       return navigate('/step-two');
     }
-  }, [selectedMeal, selectedRestaurant, location.pathname, navigate]);
+    if (selectedPeople > selectedDishesServings && location.pathname === '/step-four') {
+      return navigate('/step-three');
+    }
+  }, [selectedMeal, selectedRestaurant, selectedPeople, selectedDishesServings, location.pathname, navigate]);
 
   const steps = [
     {
