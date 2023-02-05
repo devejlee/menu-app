@@ -10,10 +10,13 @@ interface DropdownProps {
 }
 
 const Dropdown = ({ options, optionType, error = false }: DropdownProps) => {
+  const isLoading = useDishesStore(state => state.isLoading);
+  const isError = useDishesStore(state => state.error);
   const selectedMeal = useDishesStore(state => state.selectedMeal);
   const selectedRestaurant = useDishesStore(state => state.selectedRestaurant);
   const updateSelectedMeal = useDishesStore(state => state.updateSelectedMeal);
   const updateSelectedRestaurant = useDishesStore(state => state.updateSelectedRestaurant);
+  const fetchDishes = useDishesStore(state => state.fetchDishes);
 
   const ref = useClickAway(() => {
     setIsOpen(false);
@@ -22,7 +25,10 @@ const Dropdown = ({ options, optionType, error = false }: DropdownProps) => {
   const [selected, setSelected] = useState('');
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleDropdown = () => {
+  const handleDropdown = async () => {
+    if (optionType === 'dish' && !isOpen) {
+      await fetchDishes();
+    }
     setIsOpen((open) => !open);
   };
 
@@ -42,6 +48,8 @@ const Dropdown = ({ options, optionType, error = false }: DropdownProps) => {
         return selectedMeal || selected || '---';
       case 'restaurant':
         return selectedRestaurant || selected || '---';
+      case 'dish':
+        return isError ? 'error fetching dishes' : isLoading ? 'loading...' : selected || '---';
       default:
         return selected || '---';
     }
@@ -106,6 +114,10 @@ const Dropdown = ({ options, optionType, error = false }: DropdownProps) => {
                   </li>
                 );
               })}
+
+              {options.length === 0 && (
+                <li className='py-2 pl-3 pr-9 cursor-pointer hover:bg-gray-50'>No items available!</li>
+              )}
 
             </ul>
           </div>

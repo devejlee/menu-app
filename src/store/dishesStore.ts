@@ -1,11 +1,11 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
-import { DishesState } from '../types';
+import { DishesState, Meal } from '../types';
 
 export const useDishesStore = create<DishesState>()(
   devtools(
     persist(
-      (set) => ({
+      (set, get) => ({
         dishes: [],
         isLoading: false,
         error: null,
@@ -24,7 +24,11 @@ export const useDishesStore = create<DishesState>()(
               throw new Error(message);
             }
             const data = await response.json() as DishesState;
-            set({ dishes: data.dishes });
+            const allDishes = data.dishes;
+            const filteredDishes = allDishes.filter(dish => {
+              return dish.restaurant === get().selectedRestaurant && dish.availableMeals.includes(get().selectedMeal as Meal);
+            });
+            set({ dishes: filteredDishes });
           } catch (error) {
             console.error(error);
           } finally {
