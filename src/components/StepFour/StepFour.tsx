@@ -1,4 +1,5 @@
 import { useDishesStore } from '../../store/dishesStore';
+import PreviousButton from '../PreviousButton/PreviousButton';
 
 const StepFour = () => {
   const selectedMeal = useDishesStore(state => state.selectedMeal);
@@ -34,6 +35,7 @@ const StepFour = () => {
             ))}
         </ul>
       </ul>
+      <PreviousButton url='/step-three' />
       <button className='mt-2 ml-4 rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900' onClick={handleSubmit}>Submit</button>
     </main>
   );
