@@ -51,7 +51,7 @@ const StepThree = () => {
   }, [resetSelectedDish, resetSelectedServings]);
 
   return (
-    <main className='mt-4'>
+    <main>
       {selectedDishes.map(({ id, name, servings }) => (
         <DishWithServing id={id} name={name} servings={servings} key={id} />
       ))}

@@ -8,7 +8,7 @@ import NotFound from './components/NotFound/NotFound';
 
 const App = () => {
   return (
-    <div className='pt-[20vh] flex flex-col items-center min-h-screen'>
+    <div className='py-[20vh] flex flex-col items-center min-h-screen'>
       <Navigation />
       <Routes>
         <Route path='/' element={<StepOne />} />
