@@ -23,8 +23,6 @@ export interface DishesState {
   dishesFilteredByRestaurants: Dish[];
   isLoading: boolean;
   error: string | null;
-  showStepOneErrors: boolean;
-  showStepTwoErrors: boolean;
   selectedMeal: Meal | null;
   selectedPeople: number;
   selectedRestaurant: Restaurant | null;
@@ -32,8 +30,6 @@ export interface DishesState {
   selectedServings: number;
   selectedDishes: SelectedDish[];
   fetchDishes: () => void;
-  updateShowStepOneErrors: (value: boolean) => void;
-  updateShowStepTwoErrors: (value: boolean) => void;
   updateSelectedMeal: (meal: Meal) => void;
   updateSelectedPeople: (value: number) => void;
   updateSelectedRestaurant: (restaurant: Restaurant) => void;

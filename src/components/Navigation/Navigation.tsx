@@ -7,8 +7,6 @@ const Navigation = () => {
   const selectedRestaurant = useDishesStore(state => state.selectedRestaurant);
   const selectedPeople = useDishesStore(state => state.selectedPeople);
   const selectedDishes = useDishesStore(state => state.selectedDishes);
-  const updateShowStepOneErrors = useDishesStore(state => state.updateShowStepOneErrors);
-  const updateShowStepTwoErrors = useDishesStore(state => state.updateShowStepTwoErrors);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -17,35 +15,7 @@ const Navigation = () => {
     return dish.id !== null ? total + dish.servings : total;
   }, 0);
 
-  const checkSelectedMeal = () => {
-    if (!selectedMeal) {
-      updateShowStepOneErrors(true);
-      return false;
-    }
-    updateShowStepOneErrors(false);
-    return true;
-  };
-
-  const checkSelectedRestaurant = () => {
-    if (!selectedRestaurant) {
-      updateShowStepTwoErrors(true);
-      return false;
-    }
-    updateShowStepTwoErrors(false);
-    return true;
-  };
-
   const handleNavigate = (url: string) => {
-    if (url !== '/') {
-      if (!checkSelectedMeal()) {
-        return;
-      }
-    }
-    if (url !== '/' && url !== '/step-two') {
-      if (!checkSelectedRestaurant()) {
-        return;
-      }
-    }
     navigate(url);
   };
 
