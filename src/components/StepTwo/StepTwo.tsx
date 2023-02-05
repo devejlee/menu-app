@@ -1,5 +1,4 @@
 import Dropdown from '../Dropdown/Dropdown';
-import { Restaurant } from '../../types';
 import { useDishesStore } from '../../store/dishesStore';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import { getRestaurantArray } from '../../utils';
