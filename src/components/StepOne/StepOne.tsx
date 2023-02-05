@@ -19,6 +19,6 @@ const StepOne = () => {
       <PeopleInput />
     </main>
   );
-}
+};
 
-export default StepOne
+export default StepOne;

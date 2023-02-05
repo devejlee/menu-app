@@ -1,5 +1,5 @@
-import { create } from 'zustand'
-import { devtools, persist } from 'zustand/middleware'
+import { create } from 'zustand';
+import { devtools, persist } from 'zustand/middleware';
 import { DishesState } from '../types';
 
 export const useDishesStore = create<DishesState>()(
@@ -52,4 +52,4 @@ export const useDishesStore = create<DishesState>()(
       }
     )
   )
-)
+);

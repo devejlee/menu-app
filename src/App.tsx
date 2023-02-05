@@ -1,10 +1,10 @@
-import { Route, Routes } from 'react-router-dom'
-import StepOne from './components/StepOne/StepOne'
-import StepThree from './components/StepThree/StepThree'
-import StepTwo from './components/StepTwo/StepTwo'
-import StepFour from './components/StepFour/StepFour'
-import Navigation from './components/Navigation/Navigation'
-import NotFound from './components/NotFound/NotFound'
+import { Route, Routes } from 'react-router-dom';
+import StepOne from './components/StepOne/StepOne';
+import StepThree from './components/StepThree/StepThree';
+import StepTwo from './components/StepTwo/StepTwo';
+import StepFour from './components/StepFour/StepFour';
+import Navigation from './components/Navigation/Navigation';
+import NotFound from './components/NotFound/NotFound';
 
 const App = () => {
   return (
@@ -18,7 +18,7 @@ const App = () => {
         <Route path='*' element={<NotFound />} />
       </Routes>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

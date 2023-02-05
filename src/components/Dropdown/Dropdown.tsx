@@ -16,7 +16,7 @@ const Dropdown = ({ options, optionType, error = false }: DropdownProps) => {
   const updateSelectedRestaurant = useDishesStore(state => state.updateSelectedRestaurant);
 
   const ref = useClickAway(() => {
-    setIsOpen(false)
+    setIsOpen(false);
   });
 
   const [selected, setSelected] = useState('');
@@ -24,17 +24,17 @@ const Dropdown = ({ options, optionType, error = false }: DropdownProps) => {
 
   const handleDropdown = () => {
     setIsOpen((open) => !open);
-  }
+  };
 
   const handleSelect = (optionName: string) => {
     setSelected(optionName);
     setIsOpen(false);
     if (optionType === 'meal') {
-      updateSelectedMeal(optionName as Meal)
+      updateSelectedMeal(optionName as Meal);
     } else if (optionType === 'restaurant') {
-      updateSelectedRestaurant(optionName as Restaurant)
+      updateSelectedRestaurant(optionName as Restaurant);
     }
-  }
+  };
 
   const getSelected = () => {
     switch (optionType) {
@@ -72,7 +72,7 @@ const Dropdown = ({ options, optionType, error = false }: DropdownProps) => {
             >
               {options?.map((option, key) => {
                 let optionName = '';
-                let optionId = null
+                let optionId = null;
 
                 switch (optionType) {
                   case 'dish':
@@ -81,7 +81,7 @@ const Dropdown = ({ options, optionType, error = false }: DropdownProps) => {
                     break;
                   case 'meal':
                     optionName = option as Meal;
-                    optionId = option as Meal
+                    optionId = option as Meal;
                     break;
                   case 'restaurant':
                     optionName = option as Restaurant;
@@ -99,7 +99,7 @@ const Dropdown = ({ options, optionType, error = false }: DropdownProps) => {
                     role="option"
                     aria-selected={optionName === selected}
                     onClick={() => {
-                      handleSelect(optionName)
+                      handleSelect(optionName);
                     }}
                   >
                     {optionName}

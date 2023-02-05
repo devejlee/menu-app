@@ -4,6 +4,6 @@ const StepThree = () => {
       <h1>Step 3</h1>
     </main>
   );
-}
+};
 
-export default StepThree
+export default StepThree;

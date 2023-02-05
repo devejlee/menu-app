@@ -1,9 +1,9 @@
 const NotFound = () => {
   return (
     <main className='mt-4'>
-      <h1>Page Not Found</h1>
+      <h1>Page NotFound</h1>
     </main>
   );
-}
+};
 
-export default NotFound
+export default NotFound;

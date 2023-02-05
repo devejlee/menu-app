@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent } from 'react';
 import { useDishesStore } from '../../store/dishesStore';
 
 const PeopleInput = () => {
@@ -10,29 +10,29 @@ const PeopleInput = () => {
     const lastCharacter = value.charAt(value.length - 1);
     const lastCharacterAsNumber = Number(lastCharacter);
     if (value === '10') {
-      const numberValue = Number(value)
-      updateSelectedPeople(numberValue)
+      const numberValue = Number(value);
+      updateSelectedPeople(numberValue);
     } else if (lastCharacterAsNumber >= 1 && lastCharacterAsNumber <= 9 && value !== '10') {
-      updateSelectedPeople(lastCharacterAsNumber)
+      updateSelectedPeople(lastCharacterAsNumber);
     }
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Backspace') {
-      updateSelectedPeople(1)
+      updateSelectedPeople(1);
     } else if (event.key === 'ArrowUp') {
-      handleIncrement()
+      handleIncrement();
     } else if (event.key === 'ArrowDown') {
-      handleDecrement()
+      handleDecrement();
     }
   };
 
   const handleIncrement = () => {
-    updateSelectedPeople(selectedPeople < 10 ? selectedPeople + 1 : selectedPeople)
+    updateSelectedPeople(selectedPeople < 10 ? selectedPeople + 1 : selectedPeople);
   };
 
   const handleDecrement = () => {
-    updateSelectedPeople(selectedPeople > 1 ? selectedPeople - 1 : selectedPeople)
+    updateSelectedPeople(selectedPeople > 1 ? selectedPeople - 1 : selectedPeople);
   };
 
   return (

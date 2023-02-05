@@ -13,19 +13,19 @@ const Navigation = () => {
 
   const checkSelectedMeal = () => {
     if (!selectedMeal) {
-      updateShowStepOneErrors(true)
+      updateShowStepOneErrors(true);
       return false;
     }
-    updateShowStepOneErrors(false)
+    updateShowStepOneErrors(false);
     return true;
   };
 
   const checkSelectedRestaurant = () => {
     if (!selectedRestaurant) {
-      updateShowStepTwoErrors(true)
+      updateShowStepTwoErrors(true);
       return false;
     }
-    updateShowStepTwoErrors(false)
+    updateShowStepTwoErrors(false);
     return true;
   };
 
@@ -68,6 +68,6 @@ const Navigation = () => {
       </ul>
     </nav>
   );
-}
+};
 
-export default Navigation
+export default Navigation;

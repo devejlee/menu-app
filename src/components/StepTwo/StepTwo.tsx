@@ -1,6 +1,7 @@
 import Dropdown from '../Dropdown/Dropdown';
 import { Restaurant } from '../../types';
 import { useDishesStore } from '../../store/dishesStore';
+import PreviousButton from '../PreviousButton/PreviousButton';
 
 const StepTwo = () => {
   const showStepTwoErrors = useDishesStore(state => state.showStepTwoErrors);
@@ -14,8 +15,9 @@ const StepTwo = () => {
       <p>Please select a restaurant</p>
       <Dropdown options={restaurants} optionType='restaurant' error={error} />
       {error && <p className='text-red-500'>Select a restaurant!</p>}
+      <PreviousButton url='/' />
     </main>
   );
-}
+};
 
-export default StepTwo
+export default StepTwo;
