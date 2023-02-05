@@ -16,7 +16,17 @@ export const useDishesStore = create<DishesState>()(
         selectedMeal: null,
         selectedPeople: 1,
         selectedRestaurant: null,
-        selectedDishes: [],
+        selectedDish: {
+          id: null,
+          name: null,
+          servings: 1,
+        },
+        selectedServings: 1,
+        selectedDishes: [{
+          id: null,
+          name: null,
+          servings: 1,
+        }],
         fetchDishes: async () => {
           try {
             set({ isLoading: true, error: '' });
@@ -58,16 +68,51 @@ export const useDishesStore = create<DishesState>()(
         updateSelectedRestaurant: (restaurant) => {
           set({ selectedRestaurant: restaurant });
         },
-        updateSelectedDishes: (name, servings) => {
+        updateSelectedDish: (id, name, servings) => {
+          set({ selectedDish: {
+            id: id,
+            name: name,
+            servings: servings
+          } });
+        },
+        resetSelectedDish: () => {
+          set({ selectedDish: {
+            id: null,
+            name: null,
+            servings: 1,
+          } });
+        },
+        updateSelectedServings: (value) => {
           set(state => {
+            console.log('value', value);
+            const test = {
+              ...state.selectedDish,
+              servings: value,
+            };
+            console.log('test', test);
             return {
-              selectedDishes: [...state.selectedDishes, {
-                name: name,
-                servings: servings
-              }]
+              selectedServings: value,
+              selectedDish: test
             };
           });
         },        
+        resetSelectedServings: () => {
+          set({ selectedServings: 1 });
+        },
+        addSelectedDishes: () => {
+          set(state => {
+            return {
+              selectedDishes: [...state.selectedDishes, get().selectedDish]
+            };
+          });
+        },    
+        removeSelectedDishes: (id) => {
+          set(state => {
+            return {
+              selectedDishes: state.selectedDishes.filter(dish => dish.id !== id)
+            };
+          });
+        }   
       }),
       {
         name: 'dishes-storage',

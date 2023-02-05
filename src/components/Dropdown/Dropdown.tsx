@@ -7,6 +7,8 @@ interface DropdownProps {
   options: Dish[] | Meal[] | Restaurant[];
   optionType: OptionType;
   error?: boolean;
+  id?: number | null;
+  name?: string | null;
 }
 
 const Dropdown = ({ options, optionType, error = false }: DropdownProps) => {
@@ -14,8 +16,10 @@ const Dropdown = ({ options, optionType, error = false }: DropdownProps) => {
   const isError = useDishesStore(state => state.error);
   const selectedMeal = useDishesStore(state => state.selectedMeal);
   const selectedRestaurant = useDishesStore(state => state.selectedRestaurant);
+  const selectedServings = useDishesStore(state => state.selectedServings);
   const updateSelectedMeal = useDishesStore(state => state.updateSelectedMeal);
   const updateSelectedRestaurant = useDishesStore(state => state.updateSelectedRestaurant);
+  const updateSelectedDish = useDishesStore(state => state.updateSelectedDish);
   const fetchDishes = useDishesStore(state => state.fetchDishes);
 
   const ref = useClickAway(() => {
@@ -29,7 +33,7 @@ const Dropdown = ({ options, optionType, error = false }: DropdownProps) => {
     setIsOpen((open) => !open);
   };
 
-  const handleSelect = async (optionName: string) => {
+  const handleSelect = async (optionName: string, optionId: number) => {
     setSelected(optionName);
     setIsOpen(false);
     if (optionType === 'meal') {
@@ -38,6 +42,8 @@ const Dropdown = ({ options, optionType, error = false }: DropdownProps) => {
     } else if (optionType === 'restaurant') {
       updateSelectedRestaurant(optionName as Restaurant);
       await fetchDishes();
+    } else if (optionType === 'dish') {
+      updateSelectedDish(optionId, optionName, selectedServings);
     }
   };
 
@@ -79,7 +85,7 @@ const Dropdown = ({ options, optionType, error = false }: DropdownProps) => {
             >
               {options?.map((option, key) => {
                 let optionName = '';
-                let optionId = null;
+                let optionId: null | number | Meal | Restaurant = null;
 
                 switch (optionType) {
                   case 'dish':
@@ -106,7 +112,7 @@ const Dropdown = ({ options, optionType, error = false }: DropdownProps) => {
                     role="option"
                     aria-selected={optionName === selected}
                     onClick={() => {
-                      handleSelect(optionName);
+                      handleSelect(optionName, optionId as number);
                     }}
                   >
                     {optionName}

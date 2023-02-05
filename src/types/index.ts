@@ -12,7 +12,8 @@ export interface Dish {
 }
 
 export interface SelectedDish {
-  name: string;
+  id: number | null;
+  name: string | null;
   servings: number
 }
 
@@ -27,6 +28,8 @@ export interface DishesState {
   selectedMeal: Meal | null;
   selectedPeople: number;
   selectedRestaurant: Restaurant | null;
+  selectedDish: SelectedDish;
+  selectedServings: number;
   selectedDishes: SelectedDish[];
   fetchDishes: () => void;
   updateShowStepOneErrors: (value: boolean) => void;
@@ -34,5 +37,10 @@ export interface DishesState {
   updateSelectedMeal: (meal: Meal) => void;
   updateSelectedPeople: (value: number) => void;
   updateSelectedRestaurant: (restaurant: Restaurant) => void;
-  updateSelectedDishes: (name: string, servings: number) => void;
+  addSelectedDishes: () => void;
+  updateSelectedDish: (id: number | null, name: string, servings: number) => void;
+  resetSelectedDish: () => void;
+  updateSelectedServings: (value: number) => void;
+  resetSelectedServings: () => void;
+  removeSelectedDishes: (id: number) => void;
 }

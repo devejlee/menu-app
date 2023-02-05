@@ -2,13 +2,18 @@ import Dropdown from '../Dropdown/Dropdown';
 import CustomInput from '../CustomInput/CustomInput';
 import { useDishesStore } from '../../store/dishesStore';
 
-const DishWithServing = () => {
+interface DishWithServingProps {
+  id: number | null;
+  name: string | null
+}
+
+const DishWithServing = ({ id, name }: DishWithServingProps) => {
   const dishesFilteredByRestaurants = useDishesStore(state => state.dishesFilteredByRestaurants);
   return (
-    <div>
-      <div>
+    <div className='flex flex-col mt-10 md:flex-row md:items-center'>
+      <div className='md:mr-4'>
         <p>Please select a dish</p>
-        <Dropdown options={dishesFilteredByRestaurants} optionType='dish' />
+        <Dropdown options={dishesFilteredByRestaurants} optionType='dish' id={id} name={name} />
       </div>
       <div>
         <p>Please enter no. of servings</p>

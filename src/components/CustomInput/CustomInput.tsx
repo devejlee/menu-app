@@ -9,7 +9,9 @@ const CustomInput = ({ optionType }: CustomInputProps) => {
   const [count, setCount] = useState(1);
 
   const selectedPeople = useDishesStore(state => state.selectedPeople);
+  const selectedServings = useDishesStore(state => state.selectedServings);
   const updateSelectedPeople = useDishesStore(state => state.updateSelectedPeople);
+  const updateSelectedServings = useDishesStore(state => state.updateSelectedServings);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -20,11 +22,15 @@ const CustomInput = ({ optionType }: CustomInputProps) => {
       setCount(numberValue);
       if (optionType === 'people') {
         updateSelectedPeople(numberValue);
+      } else if (optionType === 'servings') {
+        updateSelectedServings(numberValue);
       }
     } else if (lastCharacterAsNumber >= 1 && lastCharacterAsNumber <= 9 && value !== '10') {
+      setCount(lastCharacterAsNumber);
       if (optionType === 'people') {
-        setCount(lastCharacterAsNumber);
         updateSelectedPeople(lastCharacterAsNumber);
+      } else if (optionType === 'servings') {
+        updateSelectedServings(lastCharacterAsNumber);
       }
     }
   };
@@ -34,6 +40,8 @@ const CustomInput = ({ optionType }: CustomInputProps) => {
       setCount(1);
       if (optionType === 'people') {
         updateSelectedPeople(1);
+      } else if (optionType === 'servings') {
+        updateSelectedServings(1);
       }
     } else if (event.key === 'ArrowUp') {
       handleIncrement();
@@ -46,6 +54,8 @@ const CustomInput = ({ optionType }: CustomInputProps) => {
     setCount(count < 10 ? count + 1 : count);
     if (optionType === 'people') {
       updateSelectedPeople(selectedPeople < 10 ? selectedPeople + 1 : selectedPeople);
+    } else if (optionType === 'servings') {
+      updateSelectedServings(selectedServings < 10 ? selectedServings + 1 : selectedServings);
     }
   };
 
@@ -53,6 +63,19 @@ const CustomInput = ({ optionType }: CustomInputProps) => {
     setCount(count > 1 ? count - 1 : count);
     if (optionType === 'people') {
       updateSelectedPeople(selectedPeople > 1 ? selectedPeople - 1 : selectedPeople);
+    } else if (optionType === 'servings') {
+      updateSelectedServings(selectedServings > 1 ? selectedServings - 1 : selectedServings);
+    }
+  };
+
+  const getCount = () => {
+    switch (optionType) {
+      case 'people':
+        return selectedPeople || count;
+      case 'servings':
+        return count;
+      default:
+        return count;
     }
   };
 
@@ -60,7 +83,7 @@ const CustomInput = ({ optionType }: CustomInputProps) => {
     <div className="relative">
       <input
         type="string"
-        value={optionType === 'people' ? selectedPeople : count}
+        value={getCount()}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         className="border w-full border-gray-400 rounded py-2 px-4 leading-tight focus:outline-none focus:border-indigo-500 hover:border-gray-500"
