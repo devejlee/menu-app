@@ -1,3 +1,5 @@
+export type OptionType = 'dish' | 'meal' | 'restaurant'
+
 export type Restaurant = 'Mc Donalds' | 'Taco Bell' | 'BBQ Hut' | 'Vege Deli' | 'Pizzeria' | 'Panda Express' | 'Olive Garden';
 
 export type Meal = 'breakfast' | 'lunch' | 'dinner';
@@ -11,6 +13,8 @@ export interface Dish {
 
 export interface DishesState {
   dishes: Dish[];
+  dishesFilteredByMeals: Dish[];
+  dishesFilteredByRestaurants: Dish[];
   isLoading: boolean;
   error: string | null;
   showStepOneErrors: boolean;

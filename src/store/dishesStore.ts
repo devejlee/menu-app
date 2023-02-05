@@ -7,6 +7,8 @@ export const useDishesStore = create<DishesState>()(
     persist(
       (set, get) => ({
         dishes: [],
+        dishesFilteredByMeals: [],
+        dishesFilteredByRestaurants: [],
         isLoading: false,
         error: null,
         showStepOneErrors: false,
@@ -24,11 +26,16 @@ export const useDishesStore = create<DishesState>()(
               throw new Error(message);
             }
             const data = await response.json() as DishesState;
-            const allDishes = data.dishes;
-            const filteredDishes = allDishes.filter(dish => {
-              return dish.restaurant === get().selectedRestaurant && dish.availableMeals.includes(get().selectedMeal as Meal);
+            const dishes = data.dishes;
+            const dishesFilteredByMeals = dishes.filter(dish => {
+              return dish.availableMeals.includes(get().selectedMeal as Meal);
             });
-            set({ dishes: filteredDishes });
+            const dishesFilteredByRestaurants = dishesFilteredByMeals.filter(dish => {
+              return dish.restaurant === get().selectedRestaurant;
+            });
+            set({ dishesFilteredByMeals: dishesFilteredByMeals });
+            set({ dishesFilteredByRestaurants: dishesFilteredByRestaurants });
+            set({ dishes: dishes });
           } catch (error) {
             console.error(error);
           } finally {

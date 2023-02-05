@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import useClickAway from '../hooks/useClickAway';
 import { useDishesStore } from '../../store/dishesStore';
-import { Dish, Meal, Restaurant } from '../../types';
+import { Dish, Meal, Restaurant, OptionType } from '../../types';
 
 interface DropdownProps {
   options: Dish[] | Meal[] | Restaurant[];
-  optionType: 'dish' | 'meal' | 'restaurant';
+  optionType: OptionType;
   error?: boolean;
 }
 
@@ -32,11 +32,12 @@ const Dropdown = ({ options, optionType, error = false }: DropdownProps) => {
     setIsOpen((open) => !open);
   };
 
-  const handleSelect = (optionName: string) => {
+  const handleSelect = async (optionName: string) => {
     setSelected(optionName);
     setIsOpen(false);
     if (optionType === 'meal') {
       updateSelectedMeal(optionName as Meal);
+      await fetchDishes();
     } else if (optionType === 'restaurant') {
       updateSelectedRestaurant(optionName as Restaurant);
     }
