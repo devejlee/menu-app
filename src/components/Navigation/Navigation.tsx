@@ -52,21 +52,43 @@ const Navigation = () => {
     }
   }, [selectedMeal, selectedRestaurant, location.pathname, navigate]);
 
+  const steps = [
+    {
+      title: 'Step 1',
+      url: '/',
+      disabled: false
+    },
+    {
+      title: 'Step 2',
+      url: '/step-two',
+      disabled: false
+    },
+    {
+      title: 'Step 3',
+      url: '/step-three',
+      disabled: false
+    },
+    {
+      title: 'Step 4',
+      url: '/step-four',
+      disabled: false
+    },
+  ];
+
   return (
-    <nav>
-      <ul className="flex flex-wrap space-x-2">
-        {[
-          ['Step 1', '/'],
-          ['Step 2', '/step-two'],
-          ['Step 3', '/step-three'],
-          ['Step 4', '/step-four'],
-        ].map(([title, url]) => (
-          <li key={title}>
-            <button onClick={() => handleNavigate(url)} className="rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900">{title}</button>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <ul className="flex flex-wrap space-x-2">
+      {steps.map(step => (
+        <li key={step.title}>
+          <button
+            onClick={() => handleNavigate(step.url)}
+            className={`rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900 ${step.disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+            disabled={step.disabled}
+          >
+            {step.title}
+          </button>
+        </li>
+      ))}
+    </ul>
   );
 };
 
