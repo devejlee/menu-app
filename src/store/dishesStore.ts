@@ -105,7 +105,14 @@ export const useDishesStore = create<DishesState>()(
               selectedDishes: [...state.selectedDishes, get().selectedDish]
             };
           });
-        },    
+        },
+        resetSelectedDishes: () => {
+          set({ selectedDishes: [{
+            id: null,
+            name: null,
+            servings: 1,
+          }] });
+        },      
         removeSelectedDishes: (id) => {
           set(state => {
             return {

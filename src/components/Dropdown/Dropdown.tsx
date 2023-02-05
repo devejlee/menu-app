@@ -22,6 +22,9 @@ const Dropdown = ({ options, optionType, name, error = false }: DropdownProps) =
   const updateSelectedRestaurant = useDishesStore(state => state.updateSelectedRestaurant);
   const updateSelectedDish = useDishesStore(state => state.updateSelectedDish);
   const fetchDishes = useDishesStore(state => state.fetchDishes);
+  const resetSelectedDish = useDishesStore(state => state.resetSelectedDish);
+  const resetSelectedDishes = useDishesStore(state => state.resetSelectedDishes);
+  const resetSelectedServings = useDishesStore(state => state.resetSelectedServings);
 
   const ref = useClickAway(() => {
     setIsOpen(false);
@@ -38,9 +41,15 @@ const Dropdown = ({ options, optionType, name, error = false }: DropdownProps) =
     setSelected(optionName);
     setIsOpen(false);
     if (optionType === 'meal') {
+      resetSelectedDish();
+      resetSelectedDishes();
+      resetSelectedServings();
       updateSelectedMeal(optionName as Meal);
       await fetchDishes();
     } else if (optionType === 'restaurant') {
+      resetSelectedDish();
+      resetSelectedDishes();
+      resetSelectedServings();
       updateSelectedRestaurant(optionName as Restaurant);
       await fetchDishes();
     } else if (optionType === 'dish') {
