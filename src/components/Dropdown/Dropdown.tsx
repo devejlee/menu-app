@@ -44,6 +44,7 @@ const Dropdown = ({ options, optionType, name, disabled = false }: DropdownProps
     setSelected(optionName);
     setIsOpen(false);
     if (optionType === 'meal') {
+      updateSelectedRestaurant(null);
       resetSelectedDish();
       resetSelectedDishes();
       resetSelectedServings();

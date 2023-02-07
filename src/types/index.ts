@@ -32,7 +32,7 @@ export interface DishesState {
   fetchDishes: () => void;
   updateSelectedMeal: (meal: Meal) => void;
   updateSelectedPeople: (value: number) => void;
-  updateSelectedRestaurant: (restaurant: Restaurant) => void;
+  updateSelectedRestaurant: (restaurant: Restaurant | null) => void;
   addSelectedDishes: () => void;
   resetSelectedDishes: () => void;
   updateSelectedDish: (id: number | null, name: string, servings: number) => void;
