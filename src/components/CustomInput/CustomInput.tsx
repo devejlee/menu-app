@@ -82,7 +82,7 @@ const CustomInput = ({ optionType, servings, id, disabled = false }: CustomInput
     if (optionType === 'people') {
       return selectedPeople || count;
     }
-    else if (optionType === 'servings' && id !== null) {
+    else if (optionType === 'servings' && id !== undefined) {
       return servings;
     }
     return count;

@@ -3,17 +3,16 @@ import CustomInput from '../CustomInput/CustomInput';
 import { useDishesStore } from '../../store/dishesStore';
 
 interface DishWithServingProps {
-  id: number | null;
-  name: string | null;
-  servings: number;
+  id?: number | null;
+  name?: string | null;
+  servings?: number;
+  disabled?: boolean;
 }
 
-const DishWithServing = ({ id, name, servings }: DishWithServingProps) => {
+const DishWithServing = ({ id, name, servings, disabled }: DishWithServingProps) => {
   const dishesFilteredByRestaurants = useDishesStore(state => state.dishesFilteredByRestaurants);
   const selectedDishes = useDishesStore(state => state.selectedDishes);
   const dishesFilteredBySelectedDishes = dishesFilteredByRestaurants.filter(dish => !selectedDishes.some(selectedDish => dish.id === selectedDish.id));
-
-  const disabled = id !== null;
 
   if (dishesFilteredBySelectedDishes.length === 0 && id === null) {
     return (

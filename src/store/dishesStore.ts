@@ -20,11 +20,7 @@ export const useDishesStore = create<DishesState>()(
           servings: 1,
         },
         selectedServings: 1,
-        selectedDishes: [{
-          id: null,
-          name: null,
-          servings: 1,
-        }],
+        selectedDishes: [],
         fetchDishes: async () => {
           try {
             set({ isLoading: true, error: '' });
@@ -97,11 +93,7 @@ export const useDishesStore = create<DishesState>()(
           });
         },
         resetSelectedDishes: () => {
-          set({ selectedDishes: [{
-            id: null,
-            name: null,
-            servings: 1,
-          }] });
+          set({ selectedDishes: [] });
         },        
       }),
       {
