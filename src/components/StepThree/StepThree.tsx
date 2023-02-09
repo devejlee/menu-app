@@ -64,9 +64,7 @@ const StepThree = () => {
   }, [resetSelectedDish, resetSelectedServings]);
 
   useEffect(() => {
-    if (selectedDishesServings >= selectedPeople) {
-      setTotalServingsUnderMinError(false);
-    }
+    setTotalServingsUnderMinError(selectedDishesServings > 0 && selectedDishesServings < selectedPeople);
   }, [selectedDishesServings, selectedPeople]);
 
   return (
