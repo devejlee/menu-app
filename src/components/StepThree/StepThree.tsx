@@ -69,10 +69,13 @@ const StepThree = () => {
 
   return (
     <main>
+      <>
+        {selectedDishes.length > 0 && <p className='text-center mt-4'>Your orders:</p>}
+        {selectedDishes.map(({ id, name, servings }) => (
+          <DishWithServing id={id} name={name} servings={servings} key={id} disabled={true} />
+        ))}
+      </>
       <DishWithServing />
-      {selectedDishes.map(({ id, name, servings }) => (
-        <DishWithServing id={id} name={name} servings={servings} key={id} disabled={true} />
-      ))}
       <PreviousButton url='/step-two' />
       <button className='mt-2 ml-4 rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900' onClick={handleReset}>Reset</button>
       {dishesFilteredBySelectedDishes.length > 0 && (
