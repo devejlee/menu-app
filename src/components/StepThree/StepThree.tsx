@@ -30,11 +30,7 @@ const StepThree = () => {
     }
     if (totalServings > 10) {
       setTotalServingsOverMaxError(true);
-      setTotalServingsUnderMinError(false);
       return;
-    }
-    if (selectedDishesServings < selectedPeople) {
-      setTotalServingsUnderMinError(true);
     }
     addSelectedDishes();
     resetSelectedDish();
