@@ -29,7 +29,6 @@ const StepThree = () => {
       return;
     }
     if (totalServings > 10) {
-      setTotalServingsOverMaxError(true);
       return;
     }
     addSelectedDishes();
@@ -49,9 +48,7 @@ const StepThree = () => {
   }, [selectedDish.id]);
 
   useEffect(() => {
-    if (totalServings <= 10) {
-      setTotalServingsOverMaxError(false);
-    }
+    setTotalServingsOverMaxError(totalServings > 10);
   }, [totalServings]);
 
   useEffect(() => {
