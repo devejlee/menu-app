@@ -37,6 +37,8 @@ const StepThree = () => {
   };
 
   const handleReset = () => {
+    resetSelectedDish();
+    resetSelectedServings();
     resetSelectedDishes();
     setTotalServingsUnderMinError(false);
   };
