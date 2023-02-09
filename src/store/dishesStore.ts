@@ -92,7 +92,7 @@ export const useDishesStore = create<DishesState>()(
         addSelectedDishes: () => {
           set(state => {
             return {
-              selectedDishes: [...state.selectedDishes, get().selectedDish]
+              selectedDishes: [...state.selectedDishes, state.selectedDish]
             };
           });
         },
