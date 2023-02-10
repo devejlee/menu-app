@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { DishesState, Meal } from '../types';
+import { removeDuplicateDishes } from '../utils';
 
 export const useDishesStore = create<DishesState>()(
   devtools(
@@ -32,7 +33,8 @@ export const useDishesStore = create<DishesState>()(
             }
             const data = await response.json() as DishesState;
             const dishes = data.dishes;
-            const dishesFilteredByMeals = dishes.filter(dish => {
+            const uniqueDishes = removeDuplicateDishes(dishes);
+            const dishesFilteredByMeals = uniqueDishes.filter(dish => {
               return dish.availableMeals.includes(get().selectedMeal as Meal);
             });
             const dishesFilteredByRestaurants = dishesFilteredByMeals.filter(dish => {
@@ -40,7 +42,7 @@ export const useDishesStore = create<DishesState>()(
             });
             set({ dishesFilteredByMeals: dishesFilteredByMeals });
             set({ dishesFilteredByRestaurants: dishesFilteredByRestaurants });
-            set({ dishes: dishes });
+            set({ dishes: uniqueDishes });
           } catch (error) {
             console.error(error);
           } finally {
