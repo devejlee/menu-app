@@ -24,7 +24,7 @@ export const useDishesStore = create<DishesState>()(
         fetchDishes: async () => {
           try {
             set({ isLoading: true, error: '' });
-            const response = await fetch('/data/dishes.json');
+            const response = await fetch('/dishes.json');
             if (!response.ok) {
               const message = `An error has occured: ${response.status}`;
               set({ error: message, dishes: [] });

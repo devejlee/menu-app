@@ -1,3 +1,7 @@
 ## Getting Started
 
-Please use `npm run dev` to run the project because production will not fetch the json data.
+This project uses vite.
+
+Use `npm run dev` to run the project locally.
+
+Use `npm run build` and then `npm run preview` to preview production build.
