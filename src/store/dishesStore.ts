@@ -34,20 +34,26 @@ export const useDishesStore = create<DishesState>()(
             const data = await response.json() as DishesState;
             const dishes = data.dishes;
             const uniqueDishes = removeDuplicateDishes(dishes);
-            const dishesFilteredByMeals = uniqueDishes.filter(dish => {
-              return dish.availableMeals.includes(get().selectedMeal as Meal);
-            });
-            const dishesFilteredByRestaurants = dishesFilteredByMeals.filter(dish => {
-              return dish.restaurant === get().selectedRestaurant;
-            });
-            set({ dishesFilteredByMeals: dishesFilteredByMeals });
-            set({ dishesFilteredByRestaurants: dishesFilteredByRestaurants });
             set({ dishes: uniqueDishes });
           } catch (error) {
             console.error(error);
           } finally {
             set({ isLoading: false});
           }
+        },
+        updateDishesFilteredByMeals: () => {
+          const uniqueDishes = removeDuplicateDishes(get().dishes);
+          const dishesFilteredByMeals = uniqueDishes.filter(dish => {
+            return dish.availableMeals.includes(get().selectedMeal as Meal);
+          });
+          set({ dishesFilteredByMeals: dishesFilteredByMeals });
+        },
+        updateDishesFilteredByRestaurants: () => {
+          const dishesFilteredByMeals = get().dishesFilteredByMeals;
+          const dishesFilteredByRestaurants = dishesFilteredByMeals.filter(dish => {
+            return dish.restaurant === get().selectedRestaurant;
+          });
+          set({ dishesFilteredByRestaurants: dishesFilteredByRestaurants });
         },
         updateSelectedMeal: (meal) => {
           set({ selectedMeal: meal });

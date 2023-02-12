@@ -18,10 +18,11 @@ const Dropdown = ({ options, optionType, name, disabled = false }: DropdownProps
   const selectedRestaurant = useDishesStore(state => state.selectedRestaurant);
   const selectedServings = useDishesStore(state => state.selectedServings);
   const selectedDishes = useDishesStore(state => state.selectedDishes);
+  const updateDishesFilteredByMeals = useDishesStore(state => state.updateDishesFilteredByMeals);
+  const updateDishesFilteredByRestaurants = useDishesStore(state => state.updateDishesFilteredByRestaurants);
   const updateSelectedMeal = useDishesStore(state => state.updateSelectedMeal);
   const updateSelectedRestaurant = useDishesStore(state => state.updateSelectedRestaurant);
   const updateSelectedDish = useDishesStore(state => state.updateSelectedDish);
-  const fetchDishes = useDishesStore(state => state.fetchDishes);
   const resetSelectedDish = useDishesStore(state => state.resetSelectedDish);
   const resetSelectedDishes = useDishesStore(state => state.resetSelectedDishes);
   const resetSelectedServings = useDishesStore(state => state.resetSelectedServings);
@@ -49,13 +50,13 @@ const Dropdown = ({ options, optionType, name, disabled = false }: DropdownProps
       resetSelectedDishes();
       resetSelectedServings();
       updateSelectedMeal(optionName as Meal);
-      await fetchDishes();
+      updateDishesFilteredByMeals();
     } else if (optionType === 'restaurant') {
       resetSelectedDish();
       resetSelectedDishes();
       resetSelectedServings();
       updateSelectedRestaurant(optionName as Restaurant);
-      await fetchDishes();
+      updateDishesFilteredByRestaurants();
     } else if (optionType === 'dish') {
       updateSelectedDish(optionId, optionName, selectedServings);
     }
