@@ -81,10 +81,10 @@ const StepThree = () => {
         <p className='mt-4 text-red-500'>Dish not selected</p>
       )}
       {totalServingsOverMaxError && (
-        <p className='mt-4 text-red-500'>Selected servings over maximum (10)</p>
+        <p className='mt-4 text-red-500'>Total selected servings over maximum (10)</p>
       )}
       {totalServingsUnderMinError && (
-        <p className='mt-4 text-red-500'>Total servings ({selectedDishesServings}) under minimum ({selectedPeople})</p>
+        <p className='mt-4 text-red-500'>Total order servings ({selectedDishesServings}) under minimum ({selectedPeople})</p>
       )}
     </main>
   );
