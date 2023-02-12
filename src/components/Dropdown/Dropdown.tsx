@@ -12,8 +12,6 @@ interface DropdownProps {
 }
 
 const Dropdown = ({ options, optionType, name, disabled = false }: DropdownProps) => {
-  const isLoading = useDishesStore(state => state.isLoading);
-  const isError = useDishesStore(state => state.error);
   const selectedMeal = useDishesStore(state => state.selectedMeal);
   const selectedRestaurant = useDishesStore(state => state.selectedRestaurant);
   const selectedServings = useDishesStore(state => state.selectedServings);
@@ -69,7 +67,7 @@ const Dropdown = ({ options, optionType, name, disabled = false }: DropdownProps
       case 'restaurant':
         return selectedRestaurant || selected || '---';
       case 'dish':
-        return isError ? 'error fetching dishes' : isLoading ? 'loading...' : name || selected || '---';
+        return name || selected || '---';
       default:
         return selected || '---';
     }
