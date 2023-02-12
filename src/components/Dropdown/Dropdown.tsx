@@ -12,10 +12,13 @@ interface DropdownProps {
 }
 
 const Dropdown = ({ options, optionType, name, disabled = false }: DropdownProps) => {
+  const isLoading = useDishesStore(state => state.isLoading);
+  const isError = useDishesStore(state => state.error);
   const selectedMeal = useDishesStore(state => state.selectedMeal);
   const selectedRestaurant = useDishesStore(state => state.selectedRestaurant);
   const selectedServings = useDishesStore(state => state.selectedServings);
   const selectedDishes = useDishesStore(state => state.selectedDishes);
+  const fetchDishes = useDishesStore(state => state.fetchDishes);
   const updateDishesFilteredByMeals = useDishesStore(state => state.updateDishesFilteredByMeals);
   const updateDishesFilteredByRestaurants = useDishesStore(state => state.updateDishesFilteredByRestaurants);
   const updateSelectedMeal = useDishesStore(state => state.updateSelectedMeal);
@@ -48,6 +51,7 @@ const Dropdown = ({ options, optionType, name, disabled = false }: DropdownProps
       resetSelectedDishes();
       resetSelectedServings();
       updateSelectedMeal(optionName as Meal);
+      await fetchDishes();
       updateDishesFilteredByMeals();
     } else if (optionType === 'restaurant') {
       resetSelectedDish();
@@ -100,7 +104,11 @@ const Dropdown = ({ options, optionType, name, disabled = false }: DropdownProps
               role="listbox"
               aria-labelledby="options"
             >
-              {options?.map((option, key) => {
+              {isLoading && optionType === 'restaurant' ? (
+                <li className='py-2 pl-3 pr-9 cursor-pointer hover:bg-gray-50'>Loading...</li>
+              ) : isError && optionType === 'restaurant' ? (
+                <li className='py-2 pl-3 pr-9 cursor-pointer hover:bg-gray-50'>Error fetching data</li>
+              ) : options?.map((option, key) => {
                 let optionName = '';
                 let optionId: null | number | Meal | Restaurant = null;
 
@@ -137,7 +145,7 @@ const Dropdown = ({ options, optionType, name, disabled = false }: DropdownProps
                 );
               })}
 
-              {options.length === 0 && (
+              {options.length === 0 && !isLoading && !isError && (
                 <li className='py-2 pl-3 pr-9 cursor-pointer hover:bg-gray-50'>No items available!</li>
               )}
 
