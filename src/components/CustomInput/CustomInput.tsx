@@ -2,7 +2,7 @@ import React, { useState, ChangeEvent, useEffect } from 'react';
 import { useDishesStore } from '../../store/dishesStore';
 
 interface CustomInputProps {
-  optionType: 'people' | 'servings'
+  optionType?: 'people' | 'servings'
   servings?: number
   id?: number | null
   disabled?: boolean;
