@@ -4,8 +4,8 @@ import { useDishesStore } from '../../store/dishesStore';
 import { Dish, Meal, Restaurant, OptionType } from '../../types';
 
 interface DropdownProps {
-  options: Dish[] | Meal[] | Restaurant[];
-  optionType: OptionType;
+  options: Dish[] | Meal[] | Restaurant[] | string[];
+  optionType?: OptionType;
   id?: number | null;
   name?: string | null;
   disabled?: boolean;
@@ -126,7 +126,7 @@ const Dropdown = ({ options, optionType, name, disabled = false }: DropdownProps
                     optionId = option as Restaurant;
                     break;
                   default:
-                    optionName = '';
+                    optionName = option as string;
                     optionId = key;
                 }
 
@@ -145,7 +145,7 @@ const Dropdown = ({ options, optionType, name, disabled = false }: DropdownProps
                 );
               })}
 
-              {options.length === 0 && !isLoading && !isError && (
+              {options?.length === 0 && !isLoading && !isError && (
                 <li className='py-2 pl-3 pr-9 cursor-pointer hover:bg-gray-50'>No items available!</li>
               )}
 
